@@ -10,31 +10,34 @@ function Game() {
   const [guessCents, setGuessCents] = useState(0);
   const [inputValue, setInputValue] = useState("");
   const [showFront, setShowFront] = useState(true);
+  const [error, setError] = useState(false); // New state to track the error status
+
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setShowFront((prev) => !prev); // Toggle the flip state instead of showing an alert
-    setGuessCents(0);
+    if (inputValue.trim() === "" || guessCents === 0) {
+      setError(true); // Set error state to true if no price is entered
+    } else {
+      setError(false); // Clear error if the form is being submitted correctly
+      setShowFront((prev) => !prev); // Toggle the flip state instead of showing an alert
+      setGuessCents(0);
+      setInputValue(""); // Clear the input value
+    }
   };
   const handleGuessChange = (e) => {
-    // Extract last entered value by the user
-    let newValue = e.target.value.replace(/[^0-9]/g, ''); // Keep only digits
-    
-    // Ensure the newValue is treated as a number for further operations
+    setError(false); // Clear error when the user starts typing
+    let newValue = e.target.value.replace(/[^0-9]/g, '');
     newValue = parseInt(newValue, 10);
-  
-    // Check if newValue is NaN (in case of empty input) and reset if necessary
+
     if (isNaN(newValue)) {
       setInputValue("");
       setGuessCents(0);
-      return; // Exit early if newValue is not a valid number
+      return;
     }
-  
-    // Convert newValue back to string for consistent manipulation
+
     newValue = newValue.toString();
-  
-    // Format the newValue as a string representing euros and cents
+
     if (newValue.length === 1) {
       newValue = `0.0${newValue}`;
     } else if (newValue.length === 2) {
@@ -42,9 +45,9 @@ function Game() {
     } else {
       newValue = `${newValue.slice(0, -2)}.${newValue.slice(-2)}`;
     }
-  
-    setInputValue(newValue); // Update the display value
-    setGuessCents(parseInt(newValue.replace('.', ''), 10)); // Update cents value
+
+    setInputValue(newValue);
+    setGuessCents(parseInt(newValue.replace('.', ''), 10));
   };
 
   const formattedInputValue = `€${inputValue}`;
@@ -62,9 +65,10 @@ function Game() {
           type="tel"
           value={formattedInputValue}
           onChange={handleGuessChange}
-          className={styles.guessInput}
+          className={`${styles.guessInput} ${error ? styles.error : ''}`} // Apply error styling if error state is true
           placeholder="Enter your guess in €"
         />
+        {/* Error message removed */}
         <button type="submit" className={styles.submitButton}>Submit</button>
       </form>
     </div>

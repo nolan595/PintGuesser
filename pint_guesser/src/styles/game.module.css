@@ -59,6 +59,9 @@ line-height: normal;
     background-color: #fff;
     text-align: center; /* Align text to the right for numerical input */
 }
+.error {
+    border: 2px solid red;
+}
 
 .guessInput::placeholder {
     color: #aaa; /* Lighter text color for placeholder */

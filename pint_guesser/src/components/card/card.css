@@ -68,7 +68,7 @@
     border-radius: 10px;
     width: 70%; /* Making it wider to accommodate more text */
     max-height: 50%; /* Limiting the height */
-    overflow-y: auto; /* Allows scrolling if the text is too much */
+    overflow-y: hidden; /* Allows scrolling if the text is too much */
     font-size: 16px; /* Adjust this as needed */
     line-height: 1.5; /* Good for readability */
     text-align: center;

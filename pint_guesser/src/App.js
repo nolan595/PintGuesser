@@ -10,6 +10,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<MainPage />} />
+        
         <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </Router>

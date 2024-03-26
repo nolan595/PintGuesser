@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../firebase'; // Adjust the path as necessary
-import {LoginForm} from './' // Adjust the path as necessary
-// import {styles} from '../styles/adminPage.module.css'
+import {LoginForm, UploadForm} from './' // Adjust the path as necessary
+import styles from '../styles/adminPage.module.css'
 function AdminPage() {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
@@ -28,9 +28,8 @@ function AdminPage() {
   }
 
   return (
-    <div>
-      <p>Welcome to the Admin Panel!</p>
-      {/* Admin panel content */}
+    <div className={styles.mainContainer}>
+        <UploadForm/>
     </div>
   );
 }

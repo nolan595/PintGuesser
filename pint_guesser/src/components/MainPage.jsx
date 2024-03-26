@@ -1,15 +1,28 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
-
+import React, { useState } from 'react';
+import { Game } from '../components'; // Ensure this path is correct
+import styles from '../styles/mainPage.module.css'
+ 
 function MainPage() {
+  const [showGame, setShowGame] = useState(false);
+
+  const handlePlayNowClick = () => {
+    setShowGame(true);
+  };
+
   return (
-    <div className="App">
-    <header className="App-header">
-      <p>Welcome to the main page!</p>
-      <Link to="/admin" className="App-link">Go to Admin Panel</Link>
-    </header>
-  </div>
-  )
+    <div className={styles.mainPage}>
+      <header className="">
+        {showGame ? (
+          <Game />
+        ) : (
+          <>
+          <button onClick={handlePlayNowClick} className={styles.playNowButton}>Play Now</button>
+            
+          </>
+        )}
+      </header>
+    </div>
+  );
 }
 
-export default MainPage
+export default MainPage;

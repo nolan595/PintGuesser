@@ -1,0 +1,13 @@
+.flip_exit {
+    transform: rotateY(0deg);
+}
+
+.flip_exit_active {
+    transform: rotateY(180deg);
+    transition: transform;
+
+}
+
+.flip_exit_done {
+    transform: rotateY(180deg);
+}

@@ -1,0 +1,46 @@
+/* src/styles/uploadForm.module.css */
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Matches LoginForm for consistency */
+    margin: auto;
+    margin-top: 100px; /* Adjust as necessary for your design */
+  }
+  
+  .formInput {
+    font-size: 16px;
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%; /* Ensure inputs stretch to match the form container */
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .formButton {
+    font-size: 16px;
+    padding: 10px;
+    margin-top: 20px;
+    cursor: pointer;
+    color: white;
+    background-color: #10b981;
+    border: none;
+    border-radius: 5px;
+    width: 100%; /* Ensure the button stretches to match the form container */
+  }
+  
+  .formButton:hover, .formButton:disabled {
+    background-color: #059669;
+  }
+  
+  .formButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  

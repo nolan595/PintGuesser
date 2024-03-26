@@ -1,0 +1,35 @@
+body, html {
+  margin: 0;
+}
+
+
+
+.mainPage {
+  display: flex;
+  justify-content: center;
+  height: 100svh; /* Make it as tall as the viewport */
+  background-image: url('../images/pint.png');
+  background-size: cover; /* Cover the entire size of the container */
+  background-position: center; /* Center the background image */
+  overflow: hidden;
+}
+
+
+.playNowButton {
+    font-size: 16px;
+
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    color: white;
+    background-color: #10b981;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .playNowButton:hover {
+    background-color: #059669;
+  }
+
+
+  

@@ -1,0 +1,94 @@
+.gameContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100vh; /* Adjust this as needed */
+}
+
+.title {
+    margin-top: 10px;
+    font-size: 40px;
+    color: #CCA75B;
+text-align: center;
+font-family: "Playfair Display";
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+
+}
+
+.pubDetails {
+color: #FFF;
+text-align: center;
+font-family: "Playfair Display";
+font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+
+.pubName {
+    margin-top: -40px;
+    margin-bottom: -20px;
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.pubStreet {
+
+    font-weight: 100;
+}
+
+.guessForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    padding: 20px;
+    background-color: #f3f3f3; 
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+.guessInput {
+    width: 60%; 
+    padding: 8px 12px;
+    border: 2px solid #CCA75B; /* Matching the title color */
+    border-radius: 4px; /* Rounded corners for the input field */
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+    text-align: center; /* Align text to the right for numerical input */
+}
+
+.guessInput::placeholder {
+    color: #aaa; /* Lighter text color for placeholder */
+}
+
+.submitButton {
+    width: 60%; /* Match input width */
+    padding: 10px 0;
+    background-color: #CCA75B; /* Matching the title color */
+    color: #fff;
+    border: none;
+    border-radius: 4px; /* Rounded corners for the button */
+    cursor: pointer; /* Change cursor to pointer to indicate clickable */
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: uppercase; /* Make the button text uppercase */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.submitButton:hover {
+    background-color: #b2985a; /* Darker shade on hover for feedback */
+}
+
+/* Additional styling to ensure the euro symbol and text alignment */
+.guessInput::-webkit-outer-spin-button,
+.guessInput::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* Removes the default spin buttons */
+    margin: 0; /* Removes margin */
+}
+
+.guessInput[type=number] {
+    -moz-appearance: textfield; /* Firefox removes the spin button */
+}

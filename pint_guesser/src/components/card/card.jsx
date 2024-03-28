@@ -1,38 +1,54 @@
-import {React, useEffect, useState} from 'react'
+import React from 'react'
 import './card.css'
 import './flip-transition.css'
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../firebase';
 import tayto from '../../images/tayto.png'
+import {motion} from 'framer-motion'
+import { useStateContext } from '../../contexts/ContextProvider';
 
-function Card({ onClick }) {
-    // eslint-disable-next-line 
-    const [images, setImages] = useState([]);
-    const [currentImage, setCurrentImage] = useState('');
-
-    useEffect(() => {
-        const fetchImages = async () => {
-            const imagesCol = collection(db, 'images');
-            const imageSnapshot = await getDocs(imagesCol);
-            const imageList = imageSnapshot.docs.map(doc => doc.data().photoURL);
-            setImages(imageList);
-            setCurrentImage(imageList[Math.floor(Math.random() * imageList.length)]);
-        };
-    
-        fetchImages();
-    }, []);
+function Card() {
+    const correctVariant = {
+        hidden: { scale: 0, opacity: 0 },
+        visible: { scale: 1, opacity: 1, transition: { duration: 0.5 } },
+      };
+      
+      const wrongVariant = {
+        hidden: { scale: 0, opacity: 0 },
+        visible: { scale: 1, opacity: 1, transition: { duration: 0.5 } },
+      };
+    const { pubData, isAnswerCorrect } = useStateContext();
+    const backgroundImageUrl = pubData.photoURL;
 
     return (
-        <div className='card' onClick={onClick}>
-            <div className='card-back' style={{backgroundImage: `url(${tayto})`}}>
-            <div className='stat-container'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque nemo animi quod molestiae, earum id obcaecati dolorem veritatis velit accusantium commodi, quo, eveniet fugiat cumque labore doloribus. Voluptatibus, molestiae vero!</div>
+        <div className='card'>
+            <div className='card-back' style={{ backgroundImage: `url(${tayto})` }}>
+                <div className='stat-container'>
+                    {isAnswerCorrect === true ? "That's Pure Cream" : isAnswerCorrect === false ? "You are some Tic" : "Guess the price!"}
+                </div>
+                {isAnswerCorrect === true ? (
+        <motion.div
+            variants={correctVariant}
+            initial="hidden"
+            animate="visible"
+        >
+            ✅
+        </motion.div>
+    ) : isAnswerCorrect === false ? (
+        <motion.div
+            variants={wrongVariant}
+            initial="hidden"
+            animate="visible"
+        >
+            ❌
+        </motion.div>
+    ) : (
+        "Guess the price!"
+    )}
             </div>
-            <div className='card-front' style={{ backgroundImage: `url(${currentImage})` }}>
-                {/* You can place additional content here if needed */}
+            <div className='card-front' style={{ backgroundImage: `url(${backgroundImageUrl})` }}>
+                {/* Additional content can be placed here if needed */}
             </div>
         </div>
     );
 }
 
-
-export default Card
+export default Card;

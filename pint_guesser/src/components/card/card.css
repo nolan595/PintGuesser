@@ -13,7 +13,6 @@
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.8);
   
     user-select: none;
-    cursor: pointer;
   }
   
   .card-front,
@@ -59,7 +58,7 @@
 
   .stat-container {
     position: absolute;
-    bottom: 20px; /* You can adjust this for positioning */
+    top: 20px; /* You can adjust this for positioning */
     left: 50%;
     transform: translateX(-50%); /* Center the container */
     background-color: rgba(0, 0, 0, 0.7); /* Slightly darker for better readability */

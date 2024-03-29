@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import { useStateContext } from '../contexts/ContextProvider';
+import easy from '../sounds/easy.mp3'
+import brilliant from '../sounds/brilliant.mp3'
+import jackDrink from '../sounds/JackDrink.mp3'
+import youLose from '../sounds/YouLose.mp3'
+import bastard from '../sounds/Bastard.mp3'
+import gobshite from '../sounds/JackGobshite.mp3'
 
 import styles from '../styles/game.module.css';
 import {FlipCard} from '../components';
@@ -16,8 +22,11 @@ function Game() {
   const [error, setError] = useState(false); // New state to track the error status
   const { pubData, setPubData } = useStateContext();
   const [buttonLabel, setButtonLabel] = useState("Submit");
-  const {setIsAnswerCorrect} = useStateContext();
+    // eslint-disable-next-line 
+  const { setIsAnswerCorrect, score, setScore } = useStateContext();
 
+  const correctGuessSounds = [brilliant, jackDrink, easy];
+  const incorrectGuessSounds = [bastard, gobshite, youLose];
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -47,6 +56,11 @@ function Game() {
 
     fetchData();
   }, [setPubData]);
+
+  const playRandomSound = (soundArray) => {
+    const sound = new Audio(soundArray[Math.floor(Math.random() * soundArray.length)]);
+    sound.play();
+  };
 
   const checkGuess = (guess, actualPrice) => {
     return Math.abs(guess - actualPrice) <= 10;
@@ -93,17 +107,31 @@ function Game() {
       const actualPriceInCents = parseInt(pubData.price, 10);
       const isCorrectGuess = checkGuess(guessInCents, actualPriceInCents);
   
-      // Here, you check if the guess is correct and set the isAnswerCorrect state accordingly
+      // Here, you check if the guess is correct
       if (isCorrectGuess) {
         setIsAnswerCorrect(true); // Set isAnswerCorrect to true in your context
         setGuessMessage("Correct! Next pub?");
         setShowFront(false);
         setButtonLabel("Next Pub");
+  
+        // Increase the score by 10 and log the new score
+        setScore(prevScore => {
+          const newScore = prevScore + 10;
+          console.log(`New score: ${newScore}`); // Log the new score
+          return newScore; // Update the score state
+        });
+        playRandomSound(correctGuessSounds);
+  
       } else {
         setIsAnswerCorrect(false); // Set isAnswerCorrect to false in your context
         setGuessMessage("Try again!");
         setShowFront(false);
         setButtonLabel("Play Again");
+  
+        // Reset the score to 0 and log it
+        setScore(0); // Reset the score
+        playRandomSound(incorrectGuessSounds);
+        console.log("Score reset to 0 due to incorrect guess"); // Log the reset
       }
   
       console.log(isCorrectGuess ? "Correct guess" : "Wrong guess"); // Log the result
@@ -134,9 +162,8 @@ function Game() {
 
   const handleNextPub = (e) => {
     e.preventDefault();
-    if (buttonLabel === "Next Pub") {
-      loadNewPub(); // Load new pub data
-    }
+
+    loadNewPub()
     setGuessCents(0);
     setGuessMessage("");
     setError(false);

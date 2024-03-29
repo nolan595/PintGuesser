@@ -5,13 +5,15 @@ const StateContext = createContext();
 export const ContextProvider = ({children}) => {
     const [pubData, setPubData] = useState({});
     const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);
+    const [score, setScore] = useState(0);
 
 
 return (
     <StateContext.Provider
     value={{
         pubData, setPubData,
-        isAnswerCorrect, setIsAnswerCorrect
+        isAnswerCorrect, setIsAnswerCorrect,
+        score, setScore
     }}>
        {children}
     </StateContext.Provider>

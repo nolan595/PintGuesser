@@ -70,6 +70,8 @@ line-height: normal;
     height: 1rem; /* fixed height to prevent box resizing */
     line-height: 1rem; /* align the text vertically */
     text-align: center; /* center the text horizontally */
+    font-family: "Playfair Display";
+
   }
 
 .guessInput::placeholder {
